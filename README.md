@@ -1,2 +1,3 @@
 # ProyectoSistemasInvestigacion
 Metodo Simplex
+
