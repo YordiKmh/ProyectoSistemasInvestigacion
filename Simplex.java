@@ -1,4 +1,5 @@
 package simplex.com.example;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -47,14 +48,14 @@ public class simplex {
             datos.write(Escribir);
             Escribir.close();
         } catch (IOException e) {
-            System.out.println("Error al guardar el archivo de Excel. Asegúrate de que el archivo no está abierto en otro programa.");
+            System.out.println("Error al guardar el archivo de Excel.");
         }
     }
 
     public static void simplex(double[][] tableau) {
         int m = tableau.length;
         int n = tableau[0].length;
-        System.out.println("Arreglo original:");
+        System.out.println("Tabla Principal:");
         printDoubleArray(m, n, tableau);
 
         int pivotCol = -1;
@@ -85,7 +86,7 @@ public class simplex {
             tableau[pivotRow][j] /= coeficiente;
         }
 
-        System.out.println("Arreglo de coeficiente =1:");
+        System.out.println("Operaciones =1:");
         printDoubleArray(m, n, tableau);
         subtractCoefficientFromRow(pivotRow, coeficiente, tableau, pivotCol);
     }
@@ -107,7 +108,7 @@ public class simplex {
             }
         }
 
-        System.out.println("Arreglo con las operaciones hechas:");
+        System.out.println("Resolucion:");
         printDoubleArray(m, n, tabla);
     }
 
