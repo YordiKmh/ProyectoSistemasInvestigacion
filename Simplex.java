@@ -11,7 +11,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class simplex {
-    private static int obtenerContenidoCelda(Cell cell) {
+    private static int getCellContents(Cell cell) {
         switch (cell.getCellType()) {
             case STRING:
                 return Integer.parseInt(cell.getStringCellValue());
@@ -24,16 +24,16 @@ public class simplex {
         }
     }
 
-    private static void printDoubleArray(int numFilas, int numColumnas, double[][] datos) {
-        for (int i = 0; i < numFilas; i++) {
-            for (int j = 0; j < numColumnas; j++) {
-                System.out.print(datos[i][j] + "\t");
+    private static void printDoubleArray(int numRows, int numCols, double[][] data) {
+        for (int i = 0; i < numRows; i++) {
+            for (int j = 0; j < numCols; j++) {
+                System.out.print(data[i][j] + "\t");
             }
             System.out.println();
         }
     }
 
-    public static void cerrarArchivo(Workbook datos) {
+    public static void CArchivo(Workbook datos) {
         try {
             datos.close();
         } catch (IOException e) {
@@ -41,15 +41,16 @@ public class simplex {
         }
     }
 
-    public static void guardarInformacion(Workbook datos, String rutaArchivo) {
+    public static void GInformacion(Workbook datos, String RArchivo) {
         try {
-            FileOutputStream escribir = new FileOutputStream(rutaArchivo);
-            datos.write(escribir);
-            escribir.close();
+            FileOutputStream Escribir = new FileOutputStream(RArchivo);
+            datos.write(Escribir);
+            Escribir.close();
         } catch (IOException e) {
             System.out.println("Error al guardar el archivo de Excel. Asegúrate de que el archivo no está abierto en otro programa.");
         }
     }
+
     public static void simplex(double[][] tableau) {
         int m = tableau.length;
         int n = tableau[0].length;
@@ -84,12 +85,12 @@ public class simplex {
             tableau[pivotRow][j] /= coeficiente;
         }
 
-        System.out.println("Arreglo coeficiente =1:");
+        System.out.println("Arreglo de coeficiente =1:");
         printDoubleArray(m, n, tableau);
         subtractCoefficientFromRow(pivotRow, coeficiente, tableau, pivotCol);
     }
 
-    private static void subtractCoefficientFromRow(int pivotRow, double coeficiente, double[][] tableau, int pivotCol) {
+    private static void subtractCoefficientFromRow(int pivotRow, double coefficient, double[][] tableau, int pivotCol) {
         int m = tableau.length;
         int n = tableau[0].length;
         double[][] tabla = new double[m][n];
@@ -100,17 +101,18 @@ public class simplex {
         }
 
         for (int i = 0; i < m; i++) {
-            if (i == pivotRow)continue;
-            for (int j = n-1 ; j >= 0; j--) {  
-            tabla [i][j]=tableau[i][j] -(tableau[i][pivotCol]*tableau[pivotRow][j]);
-        }
+            if (i == pivotRow) continue;
+            for (int j = n - 1; j >= 0; j--) {
+                tabla[i][j] = tableau[i][j] - (tableau[i][pivotCol] * tableau[pivotRow][j]);
+            }
         }
 
-        System.out.println("Arreglo después de las operaciones:");
+        System.out.println("Arreglo con las operaciones hechas:");
         printDoubleArray(m, n, tabla);
     }
+
     public static void main(String args[]) {
-        Scanner info = new Scanner(System.in);
+        Scanner input = new Scanner(System.in);
         FileInputStream lector = null;
         Workbook libro = null;
         Sheet hoja = null;
@@ -123,32 +125,32 @@ public class simplex {
             return;
         }
 
-        int numFilas = hoja.getLastRowNum() + 1;
-        int numColumnas = hoja.getRow(0).getLastCellNum();
+        int numRows = hoja.getLastRowNum() + 1;
+        int numCols = hoja.getRow(0).getLastCellNum();
 
-        int[][] datos = new int[numFilas][numColumnas];
+        int[][] datos = new int[numRows][numCols];
         try {
-            for (int i = 0; i < numFilas; i++) {
+            for (int i = 0; i < numRows; i++) {
                 Row row = hoja.getRow(i);
 
-                for (int j = 0; j < numColumnas; j++) {
+                for (int j = 0; j < numCols; j++) {
                     Cell cell = row.getCell(j, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK);
-                    int contenidoCelda = obtenerContenidoCelda(cell);
-                    datos[i][j] = contenidoCelda;
+                    int contenidoceldas = getCellContents(cell);
+                    datos[i][j] = contenidoceldas;
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        double[][] tableau = new double[numFilas][numColumnas];
-        for (int i = 0; i < numFilas; i++) {
-            for (int j = 0; j < numColumnas; j++) {
+        double[][] tableau = new double[numRows][numCols];
+        for (int i = 0; i < numRows; i++) {
+            for (int j = 0; j < numCols; j++) {
                 tableau[i][j] = datos[i][j];
             }
         }
 
         simplex(tableau);
-        cerrarArchivo(libro);
+        CArchivo(libro);
     }
 }
