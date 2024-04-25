@@ -118,7 +118,7 @@ public class simplex {
         Workbook libro = null;
         Sheet hoja = null;
         try {
-            lector = new FileInputStream("C:/Users/ING. Y.K.M.H/Documents/metodo_simplex.xlsx");
+            lector = new FileInputStream("C:/Users/LapOne MX/Documents/simplex.xlsx");
             libro = new XSSFWorkbook(lector);
             hoja = libro.getSheetAt(0);
         } catch (IOException e) {
