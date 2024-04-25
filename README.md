@@ -12,4 +12,4 @@ Esta parte del codigo manda a llamar el archivo de excel generado
 
 Esta parte del codigo extrae los datos ingresados en el archivo de excel y resuelve el problema y ya.
 
-![alt text]()
+![alt text](https://github.com/YordiKmh/ProyectoSistemasInvestigacion/blob/main/Simplex/resources/Evidencia%201.png)
