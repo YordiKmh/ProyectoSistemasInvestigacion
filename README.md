@@ -6,3 +6,6 @@ Esta parte del codigo genera un archivo de excel.
 
 ![alt text](https://github.com/YordiKmh/ProyectoSistemasInvestigacion/blob/main/Simplex/resources/Evidencia%203.png)
 
+Esta parte del codigo manda a llamar el archivo de excel generado
+
+![alt text]()
